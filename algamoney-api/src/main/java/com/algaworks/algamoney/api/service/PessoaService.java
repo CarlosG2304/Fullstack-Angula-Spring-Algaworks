@@ -32,11 +32,11 @@ public class PessoaService {
 		
 	}
 	
+
 	public Pessoa buscarPessoaPeloCodigo(Long codigo) {
-		Pessoa pessoaSalva = pessoaRepository.findOne(codigo);
-		if (pessoaSalva == null) {
-			throw new EmptyResultDataAccessException(1);
-		}
+		Pessoa pessoaSalva =  pessoaRepository.findById(codigo)
+								.orElseThrow(() -> new EmptyResultDataAccessException(1));
+
 		return pessoaSalva;
 	}
 	

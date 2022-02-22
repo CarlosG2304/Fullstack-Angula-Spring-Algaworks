@@ -1,5 +1,7 @@
 package com.algaworks.algamoney.api.resource;
 
+import java.util.Optional;
+
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
@@ -46,15 +48,15 @@ public class PessoaResource {
 	}
 	
 	@GetMapping("/{codigo}")
-	public ResponseEntity<Pessoa> buscarPeloCodigo(@PathVariable Long codigo) {
-		Pessoa pessoa = pessoaRepository.findOne(codigo);
+	public ResponseEntity<Optional<Pessoa>> buscarPeloCodigo(@PathVariable Long codigo) {
+		Optional<Pessoa> pessoa = pessoaRepository.findById(codigo);
 		return pessoa != null ? ResponseEntity.ok(pessoa) : ResponseEntity.notFound().build();
 	}
 	
 	@DeleteMapping("/{codigo}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void removar(@PathVariable Long codigo) {
-		pessoaRepository.delete(codigo);
+		pessoaRepository.deleteById(codigo);
 	}
 	
 

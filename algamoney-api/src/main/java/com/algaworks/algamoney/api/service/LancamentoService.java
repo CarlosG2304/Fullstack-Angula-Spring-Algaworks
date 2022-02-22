@@ -2,8 +2,6 @@ package com.algaworks.algamoney.api.service;
 
 import java.util.Optional;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,13 +22,12 @@ public class LancamentoService {
 	private LancamentoRepository lancamentoRepository;
 
 	public Lancamento salvar(Lancamento lancamento) {
-		Pessoa pessoa = pessoaRepository.findOne(lancamento.getPessoa().getCodigo());
-		if (pessoa == null || pessoa.isInativo()) {
+		Optional<Pessoa> pessoa = pessoaRepository.findById(lancamento.getPessoa().getCodigo());
+		if (pessoa == null || pessoa.get().isInativo()) {
 			throw new PessoaInexistenteOuInativaException();
 		}
 		
 		return lancamentoRepository.save(lancamento);
 	}
-	
 
 }
