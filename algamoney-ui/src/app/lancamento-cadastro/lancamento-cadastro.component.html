@@ -1,5 +1,5 @@
 <div class="container">
-  <form>
+  <form  #lancamentoForm="ngForm">
 
     <div class="grid">
       <div class="col-12">
@@ -13,7 +13,11 @@
       <div class="col-4  md:col-3 p-fluid">
         <label>Vencimento</label>
         <p-calendar dateFormat="dd/mm/yy" [inline]="false"  [readonlyInput]="false"
-        [showIcon]="false"></p-calendar>
+        [showIcon]="false" ngModel name="vencimento" #vencimento="ngModel" [required]="true"></p-calendar>
+
+      <p-message *ngIf="vencimento.hasError('required') && vencimento.dirty" severity="error"
+      text="Informe o vencimento"></p-message>
+
       </div>
       <div class="col-4 md:col-3 p-fluid">
         <label>{{ tipo.value === 'RECEITA' ?  'Recebimento' : 'Pagamento' }}</label>
@@ -21,25 +25,34 @@
       </div>
       <div class="col-8  md:col-9 p-fluid">
         <label>Descrição</label>
-        <input pInputText type="text">
+        <input pInputText type="text" name="descricao"
+        ngModel #descricao="ngModel" required minlength="5">
+
+        <app-message [control]="descricao" error="required"
+        text="Informe uma descrição"></app-message>
+
+<p-message *ngIf="descricao.hasError('minlength') && descricao.dirty" severity="error"
+    text="Mínimo de {{ descricao.errors?.['minlength'].requiredLength }} caracteres."></p-message>
+
       </div>
       <div class="col-4 md:col-3 p-fluid">
         <label>Valor</label>
-        <p-inputNumber mode="currency" currency="BRL" placeholder="0,00"></p-inputNumber>
+        <p-inputNumber mode="currency" name="valor" currency="BRL" placeholder="0,00"
+        ngModel></p-inputNumber>
       </div>
       <div class="col-6 md:col-6 p-fluid">
         <label>Categoria</label>
-      <p-dropdown [options]="categorias" placeholder="Selecione"></p-dropdown>
+      <p-dropdown [options]="categorias" placeholder="Selecione" [required]="true"></p-dropdown>
       </div>
       <div class="col-6  md:col-6 p-fluid">
         <label>Pessoa</label>
-        <p-dropdown [options]="pessoas" placeholder="Selecione" [filter]="true"></p-dropdown>      </div>
+        <p-dropdown [options]="pessoas" placeholder="Selecione" [filter]="true" [required]="true"></p-dropdown>      </div>
       <div class="col-12 p-fluid">
         <label>Observação</label>
         <textarea pInputTextarea rows="3"></textarea>
       </div>
       <div class="col-12">
-        <button pButton type="submit" label="Salvar"></button>
+        <button pButton type="submit" label="Salvar" [disabled]="lancamentoForm.invalid"></button>
         <button pButton type="button" label="Novo" class="p-button-info"></button>
         <a href="javascript:;">Voltar para a pesquisa</a>
       </div>

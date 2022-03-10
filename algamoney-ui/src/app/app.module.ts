@@ -12,6 +12,8 @@ import { TooltipModule } from 'primeng/tooltip';
 import { CalendarModule } from 'primeng/calendar';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputNumberModule } from 'primeng/inputnumber';
+import {InputMaskModule} from 'primeng/inputmask';
+import {MessageModule} from 'primeng/message';
 
 
 
@@ -21,6 +23,9 @@ import { LancamentosPesquisaComponent } from './lancamentos-pesquisa/lancamentos
 import { NavbarComponent } from './navbar/navbar.component';
 import { PessoasPesquisaComponent } from './pessoas-pesquisa/pessoas-pesquisa.component';
 import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-cadastro.component';
+import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.component';
+import { FormsModule } from '@angular/forms';
+import { MessageComponent } from './message/message.component';
 
 
 
@@ -31,10 +36,14 @@ import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-ca
     NavbarComponent,
     PessoasPesquisaComponent,
     LancamentoCadastroComponent,
+    PessoaCadastroComponent,
+    MessageComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    FormsModule,
+
     AppRoutingModule,
     InputTextModule,
     ButtonModule,
@@ -44,7 +53,9 @@ import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-ca
     CalendarModule,
     SelectButtonModule,
     DropdownModule,
-    InputNumberModule
+    InputNumberModule,
+    InputMaskModule,
+    MessageModule
   ],
   providers: [],
   bootstrap: [AppComponent]
