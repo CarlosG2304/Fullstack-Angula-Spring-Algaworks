@@ -26,6 +26,8 @@ import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-ca
 import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.component';
 import { FormsModule } from '@angular/forms';
 import { MessageComponent } from './message/message.component';
+import { LancamentosGridComponent } from './lancamentos-grid/lancamentos-grid.component';
+import { PessoasGridComponent } from './pessoas-grid/pessoas-grid.component';
 
 
 
@@ -38,6 +40,8 @@ import { MessageComponent } from './message/message.component';
     LancamentoCadastroComponent,
     PessoaCadastroComponent,
     MessageComponent,
+    LancamentosGridComponent,
+    PessoasGridComponent,
   ],
   imports: [
     BrowserModule,
