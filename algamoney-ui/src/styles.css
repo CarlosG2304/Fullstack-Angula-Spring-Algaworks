@@ -80,16 +80,14 @@ margin-right: 0.25em !important;
   .col-data {
     text-align: center !important;
   }
-
   .col-acoes-header {
-    width: 115px;
+    width: 130px;
   }
 
   .col-acoes {
-    width: 115px;
-    text-align: center !important;
+      width: 130px;
+      text-align: center;
   }
-
 }
 
 a {
