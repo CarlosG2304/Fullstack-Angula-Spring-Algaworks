@@ -10,7 +10,6 @@ import { TooltipModule } from 'primeng/tooltip';
 import { CalendarModule } from 'primeng/calendar';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputNumberModule } from 'primeng/inputnumber';
-import {InputMaskModule} from 'primeng/inputmask';
 import {MessageModule} from 'primeng/message';
 
 
