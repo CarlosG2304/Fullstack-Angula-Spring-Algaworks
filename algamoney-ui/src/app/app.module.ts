@@ -1,3 +1,4 @@
+import { SharedModule } from './shared/shared.module';
 import { PessoasModule } from './pessoas/pessoas.module';
 import { LancamentoModule } from './lancamento/lancamento.module';
 
@@ -7,15 +8,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { MessageComponent } from './message/message.component';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
-    MessageComponent
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -23,8 +22,9 @@ import { MessageComponent } from './message/message.component';
 
     LancamentoModule,
 
-    PessoasModule
+    PessoasModule,
 
+    SharedModule
 
   ],
   providers: [],

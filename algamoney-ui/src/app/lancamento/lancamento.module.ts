@@ -1,3 +1,5 @@
+import { MessageModule } from 'primeng/message';
+import { SharedModule } from './../shared/shared.module';
 import { AppRoutingModule } from './../app-routing.module';
 import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-cadastro.component';
 import { LancamentosGridComponent } from './lancamentos-grid/lancamentos-grid.component';
@@ -10,7 +12,6 @@ import { TooltipModule } from 'primeng/tooltip';
 import { CalendarModule } from 'primeng/calendar';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputNumberModule } from 'primeng/inputnumber';
-import {MessageModule} from 'primeng/message';
 
 
 
@@ -30,6 +31,8 @@ import { SelectButtonModule } from 'primeng/selectbutton';
   imports: [
     CommonModule,
     FormsModule,
+
+    SharedModule,
 
     AppRoutingModule,
     InputTextModule,

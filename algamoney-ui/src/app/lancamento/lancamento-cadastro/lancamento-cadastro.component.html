@@ -28,8 +28,8 @@
         <input pInputText type="text" name="descricao"
         ngModel #descricao="ngModel" required minlength="5">
 
-      <!--  <app-message [control]="descricao" error="required"
-        text="Informe uma descrição"></app-message>-->
+      <app-message [control]="descricao" error="required"
+        text="Informe uma descrição"></app-message>
 
 <p-message *ngIf="descricao.hasError('minlength') && descricao.dirty" severity="error"
     text="Mínimo de {{ descricao.errors?.['minlength'].requiredLength }} caracteres."></p-message>
