@@ -47,7 +47,7 @@ import { SelectButtonModule } from 'primeng/selectbutton';
     InputNumberModule,
     MessageModule,
 
-    HttpClientModule
+
   ],
   exports: [
     LancamentoCadastroComponent,
