@@ -1,4 +1,4 @@
-<p-table [value]="lancamentos" [paginator]="true" [rows]="5" [responsive]="true" styleClass="p-datatable-gridlines p-datatable-striped" >
+<p-table [value]="lancamentos" [paginator]="true" [rows]="filtro.itensPorPagina" [lazy]="true" [totalRecords]="totalRegistro" [responsive]="true" styleClass="p-datatable-gridlines p-datatable-striped" >
   <ng-template pTemplate="header">
     <tr>
       <th>Pessoa</th>

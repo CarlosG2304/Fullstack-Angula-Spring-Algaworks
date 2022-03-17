@@ -1,3 +1,4 @@
+import { LancamentoFiltro } from './../lancamento.service';
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
@@ -9,5 +10,9 @@ import { Component, Input, OnInit } from '@angular/core';
 export class LancamentosGridComponent  {
 
   @Input() lancamentos:any = [];
+
+  @Input() filtro = new LancamentoFiltro();
+
+  @Input() totalRegistro = 0;
 
 }
