@@ -15,7 +15,7 @@ export class LancamentoFiltro {
 })
 export class LancamentoService {
 
-  lancamentosUrl = 'http://localhost:8080/lancamentos'
+  lancamentosUrl = 'http://localhost:8080/lancamentos';
 
   constructor(private http:HttpClient,
               private datePipe: DatePipe) { }
@@ -54,6 +54,14 @@ if (filtro.dataVencimentoFim) {
 
     return resultado;
   });
+  }
+
+  excluir(codigo:number): Promise<any> {
+    const headers = new HttpHeaders()
+    .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+
+    return this.http.delete(`${this.lancamentosUrl}/${codigo}`, { headers })
+       .toPromise();
   }
 
 }
