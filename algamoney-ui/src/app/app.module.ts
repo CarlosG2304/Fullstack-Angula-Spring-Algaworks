@@ -1,3 +1,4 @@
+import { PessoasService } from './pessoas/pessoas.service';
 import { LancamentoService } from './lancamento/lancamento.service';
 
 import { CoreModule } from './core/core.module';
@@ -33,7 +34,7 @@ import { AppComponent } from './app.component';
     HttpClientModule
 
   ],
-  providers: [ {provide: LOCALE_ID, useValue: 'pt-BR' },LancamentoService],
+  providers: [ {provide: LOCALE_ID, useValue: 'pt-BR' },LancamentoService, PessoasService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

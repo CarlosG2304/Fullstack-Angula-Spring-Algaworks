@@ -26,7 +26,7 @@ ngOnInit(): void {
     this.lancamentoService.pesquisar(this.filtro)
     .then(resultado => {
       this.totalRegistros = resultado.total;
-      this.lancamentos =   this.lancamentos = resultado.lancamentos;
+      this.lancamentos = resultado.lancamentos;
     });
   }
   aoMudarPagina(event: LazyLoadEvent){
