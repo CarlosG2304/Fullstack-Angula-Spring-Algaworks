@@ -1,4 +1,5 @@
 <div class="container">
+  <form autocomplete="off" (ngSubmit)="pesquisar()">
   <div class="grid">
 
     <div class="col-12">
@@ -7,8 +8,8 @@
 
     <div class="col-12 p-fluid">
     <label>Nome</label>
-    <input pInputText type="text"  >
-    </div>
+    <input pInputText type="text" name="nome" [(ngModel)]="filtro.nome">
+  </div>
 
   <div class="col-12">
   <button pButton type="submit" label="Pesquisar">
@@ -17,6 +18,7 @@
   </div>
 
   </div>
+  </form>
 
 
   <div class="grid">
