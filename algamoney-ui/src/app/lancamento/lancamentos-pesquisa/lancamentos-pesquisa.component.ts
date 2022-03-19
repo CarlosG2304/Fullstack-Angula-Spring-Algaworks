@@ -1,7 +1,8 @@
+import { ErrorHandlerService } from './../../core/error-handler.service';
 import { LancamentoService, LancamentoFiltro } from './../lancamento.service';
 
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { LazyLoadEvent, MessageService } from 'primeng/api';
+import { LazyLoadEvent, MessageService, ConfirmationService } from 'primeng/api';
 import { Table } from 'primeng/table';
 
 @Component({
@@ -21,7 +22,9 @@ ngOnInit(): void {
 }
 
   constructor(private lancamentoService:LancamentoService,
-              private messageService: MessageService){}
+              private errorHandler: ErrorHandlerService,
+              private messageService: MessageService,
+              private confirmation:ConfirmationService){}
 
   pesquisar(pagina = 0){
     this.filtro.pagina = pagina;
@@ -30,12 +33,21 @@ ngOnInit(): void {
     .then(resultado => {
       this.totalRegistros = resultado.total;
       this.lancamentos = resultado.lancamentos;
-    });
+    })
+    .catch(erro => this.errorHandler.handle(erro));
   }
   aoMudarPagina(event: LazyLoadEvent){
    const pagina = event!.first! / event!.rows!;
    this.pesquisar(pagina)
 
+  }
+  confirmarExclusao(lancamento: any){
+    this.confirmation.confirm({
+    message: 'Tem certeza que deseja excluir?',
+    accept: () => {
+    this.excluir(lancamento);
+    }
+  });
   }
 
   excluir(lancamento: any){
@@ -43,6 +55,6 @@ ngOnInit(): void {
     .then(() =>{
       this.grid.reset()
       this.messageService.add({ severity: 'success', detail: 'Lançamento excluído com sucesso!' })
-    })
+    }).catch(erro => this.errorHandler.handle(erro));
   }
 }
