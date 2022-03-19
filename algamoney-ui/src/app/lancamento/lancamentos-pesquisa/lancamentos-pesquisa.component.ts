@@ -1,7 +1,7 @@
 import { LancamentoService, LancamentoFiltro } from './../lancamento.service';
 
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { LazyLoadEvent } from 'primeng/api';
+import { LazyLoadEvent, MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
 
 @Component({
@@ -20,7 +20,8 @@ ngOnInit(): void {
 
 }
 
-  constructor(private lancamentoService:LancamentoService){}
+  constructor(private lancamentoService:LancamentoService,
+              private messageService: MessageService){}
 
   pesquisar(pagina = 0){
     this.filtro.pagina = pagina;
@@ -39,8 +40,9 @@ ngOnInit(): void {
 
   excluir(lancamento: any){
     this.lancamentoService.excluir(lancamento.codigo)
-    .then(() =>
+    .then(() =>{
       this.grid.reset()
-    )
+      this.messageService.add({ severity: 'success', detail: 'Lançamento excluído com sucesso!' })
+    })
   }
 }

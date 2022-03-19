@@ -12,6 +12,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
+
 
 
 
@@ -31,10 +34,12 @@ import { AppComponent } from './app.component';
 
     CoreModule,
 
-    HttpClientModule
+    HttpClientModule,
+
+    ToastModule
 
   ],
-  providers: [ {provide: LOCALE_ID, useValue: 'pt-BR' },LancamentoService, PessoasService],
+  providers: [MessageService , {provide: LOCALE_ID, useValue: 'pt-BR' },LancamentoService, PessoasService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

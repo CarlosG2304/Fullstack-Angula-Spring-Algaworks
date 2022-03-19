@@ -34,7 +34,8 @@ import {InputMaskModule} from 'primeng/inputmask';
     TableModule,
     TooltipModule,
     InputMaskModule,
-    MessageModule
+    MessageModule,
+
   ],
  exports:[
   PessoaCadastroComponent,
