@@ -1,3 +1,4 @@
+import { CategoriasService } from './categorias/categorias.service';
 import { PessoasService } from './pessoas/pessoas.service';
 import { LancamentoService } from './lancamento/lancamento.service';
 
@@ -33,7 +34,7 @@ import { AppComponent } from './app.component';
 
 
   ],
-  providers: [ {provide: LOCALE_ID, useValue: 'pt-BR' },LancamentoService, PessoasService],
+  providers: [ {provide: LOCALE_ID, useValue: 'pt-BR' },LancamentoService, PessoasService, CategoriasService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
