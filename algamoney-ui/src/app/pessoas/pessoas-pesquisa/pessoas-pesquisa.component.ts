@@ -52,7 +52,7 @@ aoMudarPagina(event: LazyLoadEvent){
 excluir(lancamento: any){
   this.pessoasService.excluir(lancamento.codigo)
   .then(() =>{
-    this.grid.reset()
+    this.grid.reset();
     this.messageService.add({ severity: 'success', detail: 'Pessoa excluído com sucesso!' })
   }).catch(erro => this.errorHandler.handle(erro));
 }
