@@ -49,11 +49,23 @@ aoMudarPagina(event: LazyLoadEvent){
 });
 }
 
-excluir(lancamento: any){
-  this.pessoasService.excluir(lancamento.codigo)
+excluir(pessoa: any){
+  this.pessoasService.excluir(pessoa.codigo)
   .then(() =>{
     this.grid.reset();
     this.messageService.add({ severity: 'success', detail: 'Pessoa excluído com sucesso!' })
   }).catch(erro => this.errorHandler.handle(erro));
+}
+
+mudarStatus(pessoa: any){
+  const novoStatus = !pessoa.ativo;
+  this.pessoasService.mudarStatus(pessoa.codigo,novoStatus)
+  .then(() =>{
+    const acao = novoStatus ? 'ativada' : 'desativada';
+
+    pessoa.ativo = novoStatus;
+    this.messageService.add({ severity: 'success', detail: `Pessoa ${acao}  com sucesso!` })
+  }).catch(erro => this.errorHandler.handle(erro));
+
 }
 }
