@@ -52,4 +52,12 @@ listarTodas() : Promise<any> {
     .then((response: any) => response['content']);
 }
 
+ excluir(codigo:number): Promise<any>{
+  const headers = new HttpHeaders()
+  .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+
+  return this.http.delete(`${this.pessoasUrl}/${codigo}`, { headers })
+  .toPromise();
+ }
+
 }
