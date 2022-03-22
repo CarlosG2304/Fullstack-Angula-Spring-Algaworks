@@ -44,7 +44,7 @@ export class LancamentoCadastroComponent implements OnInit {
        this.messageService.add({ severity: 'success', detail: 'Lançamento adicionado com sucesso!' })
        form.reset();
        this.lancamento = new Lancamento();
-      }).catch(erro => this.errorHandler.handle(erro)) ;
+      }).catch(erro => this.errorHandler.handle(erro));
   }
 
   carregarCategorias(){

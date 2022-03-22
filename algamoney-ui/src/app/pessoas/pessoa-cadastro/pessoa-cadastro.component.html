@@ -1,5 +1,5 @@
 <div class="container">
-<form>
+<form #pessoaForm="ngForm" (ngSubmit)="salvar(pessoaForm)">
 
   <div class="grid">
     <div class="col-12">
@@ -8,7 +8,7 @@
       <div class="col-12 md:col-12 p-fluid">
         <span class="p-float-label">
           <input type="text" pInputText
-          ngModel name="nome" #nome="ngModel" required minlength="5">
+          [(ngModel)]="pessoa.nome" name="nome" #nome="ngModel" required minlength="5">
           <label for="float-input">Nome</label>
       </span>
 
@@ -22,7 +22,7 @@
       <div class="col-12  md:col-9 p-fluid">
         <label>Logradouro</label>
         <input pInputText type="text"
-        ngModel name="logradouro" #logradouro="ngModel" required>
+        [(ngModel)]="pessoa.endereco.logradouro" name="logradouro" #logradouro="ngModel" required>
 
       <p-message *ngIf="logradouro.hasError('required') && logradouro.dirty" severity="error"
       text="Informe o logradouro"></p-message>
@@ -31,7 +31,7 @@
       <div class="col-12  md:col-3 p-fluid">
         <label>Numero</label>
         <input pInputText type="text"
-        ngModel name="numero" #numero="ngModel" required>
+        [(ngModel)]="pessoa.endereco.numero" name="numero" #numero="ngModel" required>
 
       <p-message *ngIf="numero.hasError('required') && numero.dirty" severity="error"
       text="Informe o numero"></p-message>
@@ -40,12 +40,12 @@
       <div class="col-12  md:col-4 p-fluid">
         <label>Complemento</label>
         <input pInputText type="text"
-        ngModel name="complemento" #complemento="ngModel">
+        [(ngModel)]="pessoa.endereco.complemento" name="complemento" #complemento="ngModel">
       </div>
       <div class="col-12  md:col-4 p-fluid">
         <label>Bairro</label>
         <input pInputText type="text"
-        ngModel name="bairro" #bairro="ngModel" required>
+        [(ngModel)]="pessoa.endereco.bairro" name="bairro" #bairro="ngModel" required>
 
       <p-message *ngIf="bairro.hasError('required') && bairro.dirty" severity="error"
       text="Informe o bairro"></p-message>
@@ -54,7 +54,7 @@
       <div class="col-12  md:col-4 p-fluid">
         <label>Cep</label>
         <p-inputMask mask="99999-999"
-        ngModel name="cep" #cep="ngModel" [required]="true"></p-inputMask>
+        [(ngModel)]="pessoa.endereco.cep" name="cep" #cep="ngModel" [required]="true"></p-inputMask>
 
       <p-message *ngIf="cep.hasError('required') && cep.dirty" severity="error"
       text="Informe o cep"></p-message>
@@ -63,7 +63,7 @@
       <div class="col-12  md:col-6 p-fluid">
         <label>Cidade</label>
         <input pInputText type="text"
-        ngModel name="cidade" #cidade="ngModel" required>
+        [(ngModel)]="pessoa.endereco.cidade" name="cidade" #cidade="ngModel" required>
 
         <p-message *ngIf="cidade.hasError('required') && cidade.dirty" severity="error"
         text="Informe a cidade"></p-message>
@@ -72,7 +72,7 @@
       <div class="col-12  md:col-6 p-fluid">
         <label>Estado</label>
         <input pInputText type="text"
-        ngModel name="estado" #estado="ngModel" required>
+        [(ngModel)]="pessoa.endereco.estado" name="estado" #estado="ngModel" required>
 
       <p-message *ngIf="estado.hasError('required') && estado.dirty" severity="error"
       text="Informe o estado"></p-message>
