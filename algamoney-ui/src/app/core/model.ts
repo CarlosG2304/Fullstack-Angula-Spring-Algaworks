@@ -9,11 +9,11 @@ export class Categoria{
 export class Lancamento {
   codigo?: number;
   tipo = 'Receita';
-  descricao = '';
+  descricao?:string
   dataVencimento?:Date;
   dataPagamento?:Date;
   valor?:number;
-  observacao = '';
+  observacao?:string;
   pessoa = new Pessoa();
   categoria = new Categoria();
 }
