@@ -1,20 +1,31 @@
-import { CategoriasService } from './categorias/categorias.service';
-import { PessoasService } from './pessoas/pessoas.service';
-import { LancamentoService } from './lancamento/lancamento.service';
-
-import { CoreModule, HttpLoaderFactory } from './core/core.module';
-import { SharedModule } from './shared/shared.module';
-import { PessoasModule } from './pessoas/pessoas.module';
-import { LancamentoModule } from './lancamento/lancamento.module';
-
+import { Routes, RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+
+import { PessoasPesquisaComponent } from './pessoas/pessoas-pesquisa/pessoas-pesquisa.component';
+import { LancamentoCadastroComponent } from './lancamento/lancamento-cadastro/lancamento-cadastro.component';
+import { LancamentosPesquisaComponent } from './lancamento/lancamentos-pesquisa/lancamentos-pesquisa.component';
+import { CategoriasService } from './categorias/categorias.service';
+import { PessoasService } from './pessoas/pessoas.service';
+import { LancamentoService } from './lancamento/lancamento.service';
+
+import { CoreModule } from './core/core.module';
+import { SharedModule } from './shared/shared.module';
+import { PessoasModule } from './pessoas/pessoas.module';
+import { LancamentoModule } from './lancamento/lancamento.module';
+
+
 import { AppComponent } from './app.component';
 
+const routes: Routes = [
+ { path: 'lancamentos', component: LancamentosPesquisaComponent},
+ { path: 'lancamentos/novo', component: LancamentoCadastroComponent},
+ { path: 'pessoas', component: PessoasPesquisaComponent}
 
+];
 
 
 @NgModule({
@@ -30,7 +41,8 @@ import { AppComponent } from './app.component';
     SharedModule,
     CoreModule,
 
-    HttpClientModule
+    HttpClientModule,
+    RouterModule.forRoot(routes)
 
 
   ],

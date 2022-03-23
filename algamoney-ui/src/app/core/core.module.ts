@@ -1,16 +1,18 @@
-import { ErrorHandlerService } from './error-handler.service';
+import { HttpClient } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { CommonModule, DatePipe, registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 
-import { NavbarComponent } from './navbar/navbar.component';
-
 import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { MessageService, ConfirmationService } from 'primeng/api';
+
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { HttpClient } from '@angular/common/http';
+import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
+
+import { ErrorHandlerService } from './error-handler.service';
+import { NavbarComponent } from './navbar/navbar.component';
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -21,6 +23,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   declarations: [NavbarComponent],
   imports: [
     CommonModule,
+    RouterModule,
 
     ToastModule,
     ConfirmDialogModule,
