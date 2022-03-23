@@ -75,4 +75,40 @@ if (filtro.dataVencimentoFim) {
       .toPromise();
   }
 
+  atualizar(lancamento: Lancamento): Promise<any> {
+    const headers = new HttpHeaders()
+      .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==')
+      .append('Content-Type', 'application/json');
+
+    return this.http.put<Lancamento>(`${this.lancamentosUrl}/${lancamento.codigo}`, lancamento, { headers })
+      .toPromise();
+  }
+
+buscarPorCodigo(codigo:number){
+  const headers = new HttpHeaders()
+  .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+
+  return this.http.get(`${this.lancamentosUrl}/${codigo}`, { headers })
+  .toPromise()
+  .then((response:any) => {
+    this.converterStringsParaDatas([response]);
+
+    return response;
+  });
+
+}
+
+private converterStringsParaDatas(lancamentos: any[]) {
+
+  for (const lancamento of lancamentos) {
+
+    lancamento.dataVencimento = new Date(lancamento.dataVencimento);
+
+    if (lancamento.dataPagamento) {
+      lancamento.dataPagamento = new Date(lancamento.dataPagamento);
+    }
+  }
+}
+
+
 }

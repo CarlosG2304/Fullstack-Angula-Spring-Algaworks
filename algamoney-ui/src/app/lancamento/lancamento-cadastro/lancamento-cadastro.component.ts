@@ -36,8 +36,6 @@ export class LancamentoCadastroComponent implements OnInit {
               private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-   console.log(this.route.snapshot.params)
-
     this.carregarCategorias();
     this.carregarPessoas();
   }
