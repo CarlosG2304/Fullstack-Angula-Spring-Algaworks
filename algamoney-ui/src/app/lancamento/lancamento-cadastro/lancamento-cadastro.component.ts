@@ -8,6 +8,7 @@ import { ErrorHandlerService } from './../../core/error-handler.service';
 import { CategoriasService } from './../../categorias/categorias.service';
 import { Lancamento } from './../../core/model';
 import { PessoasService } from './../../pessoas/pessoas.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-lancamento-cadastro',
@@ -31,9 +32,12 @@ export class LancamentoCadastroComponent implements OnInit {
               private pessoasService:PessoasService,
               private lancamentoService:LancamentoService,
               private messageService:MessageService,
-              private errorHandler:ErrorHandlerService) { }
+              private errorHandler:ErrorHandlerService,
+              private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+   console.log(this.route.snapshot.params)
+
     this.carregarCategorias();
     this.carregarPessoas();
   }
