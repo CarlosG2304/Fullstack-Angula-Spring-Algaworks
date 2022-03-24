@@ -1,14 +1,15 @@
-import { MessageService } from 'primeng/api';
-import { LancamentoService } from './../lancamento.service';
-import { NgForm, FormControl } from '@angular/forms';
-
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
+import { MessageService } from 'primeng/api';
+
+import { LancamentoService } from './../lancamento.service';
 import { ErrorHandlerService } from './../../core/error-handler.service';
 import { CategoriasService } from './../../categorias/categorias.service';
 import { Lancamento } from './../../core/model';
 import { PessoasService } from './../../pessoas/pessoas.service';
-import { ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-lancamento-cadastro',
@@ -33,7 +34,8 @@ export class LancamentoCadastroComponent implements OnInit {
               private lancamentoService:LancamentoService,
               private messageService:MessageService,
               private errorHandler:ErrorHandlerService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private router: Router) { }
 
   ngOnInit(): void {
     const codigoLancamento =  this.route.snapshot.params['codigo'];
@@ -67,10 +69,11 @@ export class LancamentoCadastroComponent implements OnInit {
 
   adicionarLancamento(form: NgForm){
     this.lancamentoService.adicionar(this.lancamento)
-    .then(() => {
+    .then(lancamentoAdicionado => {
        this.messageService.add({ severity: 'success', detail: 'Lançamento adicionado com sucesso!' })
-       form.reset();
-       this.lancamento = new Lancamento();
+      // form.reset();
+      // this.lancamento = new Lancamento();
+      this.router.navigate(['/lancamentos', lancamentoAdicionado.codigo])
       }).catch(erro => this.errorHandler.handle(erro));
   }
 
@@ -98,5 +101,12 @@ export class LancamentoCadastroComponent implements OnInit {
       this.pessoas = pessoas.map((p:any) => ({ label: p.nome, value: p.codigo}));
     })
       .catch(erro => this.errorHandler.handle(erro));
+  }
+
+  novo(form:NgForm){
+    form.reset(new Lancamento);
+
+
+    this.router.navigate(['lancamentos/novo'])
   }
 }
