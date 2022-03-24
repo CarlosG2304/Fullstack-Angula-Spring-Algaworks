@@ -21,10 +21,11 @@ import { LancamentoModule } from './lancamento/lancamento.module';
 import { AppComponent } from './app.component';
 
 const routes: Routes = [
- { path: 'lancamentos', component: LancamentosPesquisaComponent},
- { path: 'lancamentos/novo', component: LancamentoCadastroComponent},
- { path: 'lancamentos/:codigo', component: LancamentoCadastroComponent},
- { path: 'pessoas', component: PessoasPesquisaComponent}
+  { path: '', redirectTo: 'lancamentos', pathMatch:'full'},
+  { path: 'lancamentos', component: LancamentosPesquisaComponent},
+  { path: 'lancamentos/novo', component: LancamentoCadastroComponent},
+  { path: 'lancamentos/:codigo', component: LancamentoCadastroComponent},
+  { path: 'pessoas', component: PessoasPesquisaComponent}
 
 ];
 
