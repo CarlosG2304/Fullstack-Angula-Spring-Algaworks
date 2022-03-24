@@ -1,3 +1,4 @@
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
@@ -35,12 +36,16 @@ export class LancamentoCadastroComponent implements OnInit {
               private messageService:MessageService,
               private errorHandler:ErrorHandlerService,
               private route: ActivatedRoute,
-              private router: Router) { }
+              private router: Router,
+              private title:Title) { }
 
   ngOnInit(): void {
     const codigoLancamento =  this.route.snapshot.params['codigo'];
 
+    this.title.setTitle('Novo lançamento')
+
     if(codigoLancamento){
+
       this.carregarLancamento(codigoLancamento);
     }
 
@@ -56,6 +61,7 @@ export class LancamentoCadastroComponent implements OnInit {
     this.lancamentoService.buscarPorCodigo(codigo)
     .then(lancamento => {
       this.lancamento = lancamento;
+      this.atualizarTituloEdicao();
     }).catch(erro => this.errorHandler.handle(erro));
   }
 
@@ -79,11 +85,11 @@ export class LancamentoCadastroComponent implements OnInit {
 
   atualizarLancamento(form: NgForm){
    this.lancamentoService.atualizar(this.lancamento)
-   .then(lancamento => {
+   .then((lancamento:Lancamento) => {
      this.lancamento = lancamento;
-
      this.messageService.add({ severity: 'success', detail: 'Lançamento alterado com sucesso!' })
-   })
+     this.atualizarTituloEdicao();
+    })
    .catch(erro => this.errorHandler.handle(erro));
   }
 
@@ -108,5 +114,9 @@ export class LancamentoCadastroComponent implements OnInit {
 
 
     this.router.navigate(['lancamentos/novo'])
+  }
+
+  atualizarTituloEdicao(){
+    this.title.setTitle(`Edição de lançamento: ${this.lancamento.descricao}`)
   }
 }

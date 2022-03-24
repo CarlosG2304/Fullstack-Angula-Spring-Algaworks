@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { CommonModule, DatePipe, registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
+import { Title } from '@angular/platform-browser';
 
 import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
@@ -42,7 +43,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     ConfirmDialogModule],
   providers: [TranslateService,MessageService ,ConfirmationService,
     DatePipe,
-    {provide: LOCALE_ID, useValue: 'pt-BR' }, ErrorHandlerService
+    {provide: LOCALE_ID, useValue: 'pt-BR' }, ErrorHandlerService, Title
   ]
 })
 export class CoreModule { }
