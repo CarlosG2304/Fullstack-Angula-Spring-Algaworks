@@ -30,3 +30,10 @@ export class Lancamento {
   categoria = new Categoria();
 }
 
+export interface Page<T> {
+  content: [];
+  totalElements: number;
+  totalPages: number;
+  size: number;
+  page: number;
+}

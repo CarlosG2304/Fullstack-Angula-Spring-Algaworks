@@ -31,8 +31,8 @@ ngOnInit(): void {
 
     this.lancamentoService.pesquisar(this.filtro)
     .then(resultado => {
-      this.totalRegistros = resultado.total;
-      this.lancamentos = resultado.lancamentos;
+      this.totalRegistros = resultado.totalElements;
+      this.lancamentos = resultado.content;
     })
     .catch(erro => this.errorHandler.handle(erro));
   }
