@@ -1,6 +1,6 @@
 import { MessageService } from 'primeng/api';
 import { LancamentoService } from './../lancamento.service';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormControl } from '@angular/forms';
 
 import { Component, OnInit } from '@angular/core';
 
@@ -36,17 +36,52 @@ export class LancamentoCadastroComponent implements OnInit {
               private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    const codigoLancamento =  this.route.snapshot.params['codigo'];
+
+    if(codigoLancamento){
+      this.carregarLancamento(codigoLancamento);
+    }
+
     this.carregarCategorias();
     this.carregarPessoas();
   }
 
+  get editando(){
+    return Boolean(this.lancamento.codigo)
+  }
+
+  carregarLancamento(codigo: number){
+    this.lancamentoService.buscarPorCodigo(codigo)
+    .then(lancamento => {
+      this.lancamento = lancamento;
+    }).catch(erro => this.errorHandler.handle(erro));
+  }
+
   salvar(form: NgForm){
+   if(this.editando){
+     this.atualizarLancamento(form);
+   }else{
+     this.adicionarLancamento(form);
+   }
+  }
+
+  adicionarLancamento(form: NgForm){
     this.lancamentoService.adicionar(this.lancamento)
     .then(() => {
        this.messageService.add({ severity: 'success', detail: 'Lançamento adicionado com sucesso!' })
        form.reset();
        this.lancamento = new Lancamento();
       }).catch(erro => this.errorHandler.handle(erro));
+  }
+
+  atualizarLancamento(form: NgForm){
+   this.lancamentoService.atualizar(this.lancamento)
+   .then(lancamento => {
+     this.lancamento = lancamento;
+
+     this.messageService.add({ severity: 'success', detail: 'Lançamento alterado com sucesso!' })
+   })
+   .catch(erro => this.errorHandler.handle(erro));
   }
 
   carregarCategorias(){
