@@ -49,9 +49,6 @@ import { SelectButtonModule } from 'primeng/selectbutton';
 
 
   ],
-  exports: [
-    LancamentoCadastroComponent,
-    LancamentosPesquisaComponent
-  ]
+  exports: []
 })
 export class LancamentoModule { }

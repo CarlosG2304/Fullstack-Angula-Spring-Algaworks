@@ -11,6 +11,7 @@ import { LancamentosPesquisaComponent } from './lancamento/lancamentos-pesquisa/
 import { CategoriasService } from './categorias/categorias.service';
 import { PessoasService } from './pessoas/pessoas.service';
 import { LancamentoService } from './lancamento/lancamento.service';
+import { PaginaNaoEncontradaComponent } from './core/pagina-nao-encontrada.component';
 
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
@@ -25,8 +26,9 @@ const routes: Routes = [
   { path: 'lancamentos', component: LancamentosPesquisaComponent},
   { path: 'lancamentos/novo', component: LancamentoCadastroComponent},
   { path: 'lancamentos/:codigo', component: LancamentoCadastroComponent},
-  { path: 'pessoas', component: PessoasPesquisaComponent}
-
+  { path: 'pessoas', component: PessoasPesquisaComponent},
+  { path: 'pagina-nao-encontrada', component: PaginaNaoEncontradaComponent},
+  { path:'**', redirectTo: 'pagina-nao-encontrada'}
 ];
 
 
