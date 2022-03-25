@@ -1,3 +1,4 @@
+import { PessoasRoutingModule } from './pessoas-routing.module';
 import { MessageModule } from 'primeng/message';
 import { PessoasGridComponent } from './pessoas-grid/pessoas-grid.component';
 import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.component';
@@ -35,6 +36,8 @@ import {InputMaskModule} from 'primeng/inputmask';
     TooltipModule,
     InputMaskModule,
     MessageModule,
+
+    PessoasRoutingModule
 
   ],
  exports:[]

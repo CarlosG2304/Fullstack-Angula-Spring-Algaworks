@@ -1,3 +1,4 @@
+import { Title } from '@angular/platform-browser';
 import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { ConfirmationService, LazyLoadEvent, MessageService } from 'primeng/api';
@@ -18,14 +19,17 @@ export class PessoasPesquisaComponent implements OnInit {
   filtro = new PessaoasFiltro;
   pessoas = [];
   @ViewChild('tabela') grid!:Table;
-  ngOnInit(): void {
-  }
 
   constructor(private pessoasService:PessoasService,
               private messageService:MessageService,
               private errorHandler: ErrorHandlerService,
-              private confirmation:ConfirmationService){}
-pesquisar(pagina = 0){
+              private confirmation:ConfirmationService,
+              private title:Title){}
+  ngOnInit(): void {
+    this.title.setTitle('Pesquisa de pessoas')
+              }
+
+ pesquisar(pagina = 0){
   this.filtro.pagina = pagina;
 
   this.pessoasService.pesquisar(this.filtro)

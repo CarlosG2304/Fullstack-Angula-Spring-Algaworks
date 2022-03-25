@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { firstValueFrom } from 'rxjs';
 import { Pessoa } from '../core/model';
 
 export class PessaoasFiltro{
@@ -12,6 +13,7 @@ export class PessaoasFiltro{
   providedIn: 'root'
 })
 export class PessoasService {
+
 
  pessoasUrl = 'http://localhost:8080/pessoas'
 
@@ -77,4 +79,21 @@ listarTodas() : Promise<any> {
   return this.http.post<Pessoa>(this.pessoasUrl, pessoa, { headers })
     .toPromise();
 }
+
+atualizar(pessoa: Pessoa): Promise<Pessoa> {
+  const headers = new HttpHeaders()
+    .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==')
+    .append('Content-Type', 'application/json');
+
+    return firstValueFrom(this.http.put<Pessoa>(`${this.pessoasUrl}/${pessoa.codigo}`, pessoa, { headers }));
+}
+
+buscarPorCodigo(codigo:number): Promise<Pessoa>{
+  const headers = new HttpHeaders()
+  .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+
+  return firstValueFrom(this.http.get<Pessoa>(`${this.pessoasUrl}/${codigo}`,  { headers }));
+}
+
+
 }
