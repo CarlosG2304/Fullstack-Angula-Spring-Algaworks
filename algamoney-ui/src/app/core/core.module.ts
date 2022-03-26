@@ -1,3 +1,4 @@
+import { AuthService } from './../seguranca/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { LOCALE_ID, NgModule } from '@angular/core';
@@ -43,7 +44,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     ConfirmDialogModule],
   providers: [TranslateService,MessageService ,ConfirmationService,
     DatePipe,
-    {provide: LOCALE_ID, useValue: 'pt-BR' }, ErrorHandlerService, Title
+    {provide: LOCALE_ID, useValue: 'pt-BR' }, ErrorHandlerService, Title, AuthService
   ]
 })
 export class CoreModule { }
