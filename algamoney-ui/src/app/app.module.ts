@@ -1,3 +1,4 @@
+import { SegurancaModule } from './seguranca/seguranca.module';
 import { HttpClientModule } from '@angular/common/http';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -27,10 +28,12 @@ import { AppComponent } from './app.component';
     BrowserModule,
     BrowserAnimationsModule,
 
-    LancamentoModule,
-    PessoasModule,
+
     SharedModule,
     CoreModule,
+    LancamentoModule,
+    PessoasModule,
+    SegurancaModule,
 
     HttpClientModule,
     AppRoutingModule
