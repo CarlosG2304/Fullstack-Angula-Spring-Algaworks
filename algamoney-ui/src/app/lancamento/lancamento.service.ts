@@ -27,8 +27,6 @@ export class LancamentoService {
   pesquisar(filtro: LancamentoFiltro): Promise<Page<Lancamento>>{
 
     let params = new HttpParams();
-  const headers = new HttpHeaders()
-  .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
 
   params = params.set('page',filtro.pagina.toString());
   params = params.set('size',filtro.itensPorPagina.toString());
@@ -45,37 +43,29 @@ export class LancamentoService {
 if (filtro.dataVencimentoFim) {
     params = params.set('dataVencimentoAte', this.datePipe.transform(filtro.dataVencimentoFim, 'yyyy-MM-dd')!);
 }
-return firstValueFrom(this.http.get<Page<Lancamento>>(`${this.lancamentosUrl}?resumo`, { headers, params }));
+return firstValueFrom(this.http.get<Page<Lancamento>>(`${this.lancamentosUrl}?resumo`, {  params }));
   }
 
   excluir(codigo:number): Promise<Lancamento> {
-    const headers = new HttpHeaders()
-    .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
 
-    return firstValueFrom(this.http.delete<Lancamento>(`${this.lancamentosUrl}/${codigo}`, { headers }))
+
+    return firstValueFrom(this.http.delete<Lancamento>(`${this.lancamentosUrl}/${codigo}`))
   }
 
   adicionar(lancamento: Lancamento): Promise<Lancamento> {
-    const headers = new HttpHeaders()
-      .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==')
-      .append('Content-Type', 'application/json');
 
-      return firstValueFrom(this.http.post<Lancamento>(this.lancamentosUrl, lancamento, { headers }));
+      return firstValueFrom(this.http.post<Lancamento>(this.lancamentosUrl, lancamento));
   }
 
   atualizar(lancamento: Lancamento): Promise<Lancamento> {
-    const headers = new HttpHeaders()
-      .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==')
-      .append('Content-Type', 'application/json');
 
-      return firstValueFrom(this.http.put<Lancamento>(`${this.lancamentosUrl}/${lancamento.codigo}`, lancamento, { headers }));
+      return firstValueFrom(this.http.put<Lancamento>(`${this.lancamentosUrl}/${lancamento.codigo}`, lancamento));
   }
 
 buscarPorCodigo(codigo:number){
-  const headers = new HttpHeaders()
-  .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
 
-  return this.http.get(`${this.lancamentosUrl}/${codigo}`, { headers })
+
+  return this.http.get(`${this.lancamentosUrl}/${codigo}`)
   .toPromise()
   .then((response:any) => {
     this.converterStringsParaDatas([response]);
