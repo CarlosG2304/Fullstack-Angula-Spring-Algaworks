@@ -17,4 +17,10 @@ export class NavbarComponent implements OnInit {
       this.usuarioLogado = this.auth.jwtPayload?.nome;
     }
 
+    criarNovoAccessToken(){
+      this.auth.obterNovoAcessToken();
+    }
+    temPermissao(permissao: string) {
+      return this.auth.temPermissao(permissao);
+    }
 }

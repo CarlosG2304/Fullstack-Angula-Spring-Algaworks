@@ -15,12 +15,12 @@ export class AuthService {
 
               login(usuario: string, senha: string): Promise<void> {
                 const headers = new HttpHeaders()
-                  .append('Content-Type', 'application/x-www-form-urlencoded')
-                  .append('Authorization', 'Basic YW5ndWxhcjpAbmd1bEByMA==');
+                .append('Content-Type', 'application/x-www-form-urlencoded')
+                .append('Authorization', 'Basic YW5ndWxhcjpAbmd1bEByMA==');
 
-                const body = `username=${usuario}&password=${senha}&grant_type=password`;
+              const body = `username=${usuario}&password=${senha}&grant_type=password`;
 
-                return this.http.post(this.oauthTokenUrl, body, { headers })
+              return this.http.post(this.oauthTokenUrl, body, { headers, withCredentials: true  })
                   .toPromise()
                   .then((response:any) => {
                     this.armazenarToken(response['access_token']);
@@ -37,12 +37,40 @@ export class AuthService {
                   });
               }
 
-              public armazenarToken(token: string) {
+              obterNovoAcessToken(): Promise<void>{
+                const headers = new HttpHeaders()
+                .append('Content-Type', 'application/x-www-form-urlencoded')
+                .append('Authorization', 'Basic YW5ndWxhcjpAbmd1bEByMA==');
+
+              const body = 'grant_type=refresh_token';
+
+
+            return  this.http.post(this.oauthTokenUrl,body, {headers, withCredentials: true})
+                .toPromise()
+                .then((response:any) => {
+                  this.armazenarToken(response['access_token']);
+
+                  console.log('Novo access token criado!');
+
+                  return Promise.resolve();
+                }).catch(response =>{
+                   console.error('Erro ao renovar token.', response);
+                   return Promise.resolve();
+                });
+
+              }
+
+              temPermissao(pemissao: string){
+                return this.jwtPayload && this.jwtPayload.authorities.includes(pemissao);
+              }
+
+
+   public armazenarToken(token: string) {
                 this.jwtPayload = this.jwtHelper.decodeToken(token);
                 console.log(this.jwtPayload);
 
                 localStorage.setItem('token', token);
-              }
+            }
 
               public carregarToken() {
                 const token = localStorage.getItem('token');
