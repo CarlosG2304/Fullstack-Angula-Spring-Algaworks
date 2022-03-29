@@ -1,3 +1,4 @@
+import { AuthService } from './../../seguranca/auth.service';
 import { ErrorHandlerService } from './../../core/error-handler.service';
 import { LancamentoService, LancamentoFiltro } from './../lancamento.service';
 
@@ -22,12 +23,15 @@ export class LancamentosPesquisaComponent implements OnInit {
               private errorHandler: ErrorHandlerService,
               private messageService: MessageService,
               private confirmation:ConfirmationService,
+              private auth:AuthService,
               private title:Title){}
 
 ngOnInit(): void {
  this.title.setTitle('Pesquisa de lançamentos');
 }
-
+NaotemPermissao(pemissao: string){
+return !this.auth.temPermissao(pemissao)
+}
 
   pesquisar(pagina = 0){
     this.filtro.pagina = pagina;

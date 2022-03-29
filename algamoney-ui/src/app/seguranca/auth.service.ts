@@ -37,7 +37,7 @@ export class AuthService {
                   });
               }
 
-              obterNovoAcessToken(): Promise<void>{
+              obterNovoAccessToken(): Promise<any>{
                 const headers = new HttpHeaders()
                 .append('Content-Type', 'application/x-www-form-urlencoded')
                 .append('Authorization', 'Basic YW5ndWxhcjpAbmd1bEByMA==');
@@ -60,9 +60,14 @@ export class AuthService {
 
               }
 
-              temPermissao(pemissao: string){
-                return this.jwtPayload && this.jwtPayload.authorities.includes(pemissao);
+              isAccessTokenInvalido(){
+                const token = localStorage.getItem('token');
+
+                return !token || this.jwtHelper.isTokenExpired(token);
               }
+
+              temPermissao(permissao: string){
+                return this.jwtPayload && this.jwtPayload.authorities.includes(permissao);              }
 
 
    public armazenarToken(token: string) {
