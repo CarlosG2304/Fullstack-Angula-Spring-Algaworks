@@ -30,7 +30,7 @@ ngOnInit(): void {
  this.title.setTitle('Pesquisa de lançamentos');
 }
 NaotemPermissao(pemissao: string){
-return !this.auth.temPermissao(pemissao)
+  return !this.auth.temPermissao(pemissao)
 }
 
   pesquisar(pagina = 0){
