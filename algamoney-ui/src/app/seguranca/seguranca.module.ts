@@ -1,3 +1,4 @@
+import { LogoutService } from './logout.service';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -44,6 +45,7 @@ export function tokenGetter(): string {
       useClass: MoneyHttpInterceptor,
       multi: true
     },
-  AuthGuard]
+  AuthGuard,
+   LogoutService]
 })
 export class SegurancaModule { }
