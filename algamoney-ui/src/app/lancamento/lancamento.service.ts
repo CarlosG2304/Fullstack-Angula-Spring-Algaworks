@@ -1,9 +1,12 @@
-import { HttpClient, HttpHeaders, HttpParams } from  '@angular/common/http';
+import { HttpClient, HttpParams } from  '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { DatePipe } from '@angular/common';
 
-import { Lancamento, Page } from './../core/model';
 import { firstValueFrom } from 'rxjs';
+
+import { Lancamento, Page } from './../core/model';
+
+import { environment } from './../../environments/environment';
 
 export class LancamentoFiltro {
   descricao: string = '';
@@ -18,10 +21,12 @@ export class LancamentoFiltro {
 })
 export class LancamentoService {
 
-  lancamentosUrl = 'http://localhost:8080/lancamentos';
+  lancamentosUrl = '';
 
   constructor(private http:HttpClient,
-              private datePipe: DatePipe) { }
+              private datePipe: DatePipe) {
+                this.lancamentosUrl = `${environment.apiUrl}/lancamentos`
+               }
 
 
   pesquisar(filtro: LancamentoFiltro): Promise<Page<Lancamento>>{
