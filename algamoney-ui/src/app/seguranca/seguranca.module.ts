@@ -29,7 +29,7 @@ export function tokenGetter(): string {
     JwtModule.forRoot({
       config: {
         tokenGetter,
-        allowedDomains: ['https://carlos-algamoney-api.herokuapp.com'],
+        allowedDomains: ['carlos-algamoney-api.herokuapp.com'],
         disallowedRoutes: ['https://carlos-algamoney-api.herokuapp.com/oauth/token']
       }
     }),
