@@ -55,8 +55,6 @@ export class AuthService {
                 .then((response:any) => {
                   this.armazenarToken(response['access_token']);
 
-                  console.log('Novo access token criado!');
-
                   return Promise.resolve();
                 }).catch(response =>{
                    console.error('Erro ao renovar token.', response);
@@ -95,7 +93,6 @@ export class AuthService {
 
    public armazenarToken(token: string) {
                 this.jwtPayload = this.jwtHelper.decodeToken(token);
-                console.log(this.jwtPayload);
 
                 localStorage.setItem('token', token);
             }
