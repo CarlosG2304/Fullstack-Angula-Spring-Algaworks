@@ -11,8 +11,6 @@ import { LancamentoService } from './lancamento/lancamento.service';
 
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
-import { PessoasModule } from './pessoas/pessoas.module';
-import { LancamentoModule } from './lancamento/lancamento.module';
 import { AppRoutingModule } from './app-routing.module';
 
 
@@ -31,8 +29,6 @@ import { AppComponent } from './app.component';
 
     SharedModule,
     CoreModule,
-    LancamentoModule,
-    PessoasModule,
     SegurancaModule,
 
     HttpClientModule,

@@ -7,8 +7,9 @@ import { PessoasPesquisaComponent } from './pessoas/pessoas-pesquisa/pessoas-pes
 
 
 const routes: Routes = [
+  { path: 'lancamentos',loadChildren: () => import('../app/lancamento/lancamento.module').then(m => m.LancamentoModule) },
+  { path: 'pessoas', loadChildren: () => import('../app/pessoas/pessoas.module').then(m => m.PessoasModule) },
   { path: '', redirectTo: 'login', pathMatch:'full'},
-  { path: 'pessoas', component: PessoasPesquisaComponent},
   { path: 'nao-autorizado', component: NaoAutorizadoComponent},
   { path: 'pagina-nao-encontrada', component: PaginaNaoEncontradaComponent},
   { path:'**', redirectTo: 'pagina-nao-encontrada'}
