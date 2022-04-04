@@ -12,6 +12,7 @@ import { LoginFormComponent } from './login-form/login-form.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MoneyHttpInterceptor } from './money-http-interceptor';
 import { AuthGuard } from './auth.guard';
+import { environment } from 'src/environments/environment';
 
 export function tokenGetter(): string {
   return localStorage.getItem('token')!;
@@ -29,8 +30,8 @@ export function tokenGetter(): string {
     JwtModule.forRoot({
       config: {
         tokenGetter,
-        allowedDomains: ['carlos-algamoney-api.herokuapp.com'],
-        disallowedRoutes: ['https://carlos-algamoney-api.herokuapp.com/oauth/token']
+        allowedDomains: [environment.apiUrl.substring(8)],
+        disallowedRoutes: [`${environment.apiUrl}/oauth/token`]
       }
     }),
 

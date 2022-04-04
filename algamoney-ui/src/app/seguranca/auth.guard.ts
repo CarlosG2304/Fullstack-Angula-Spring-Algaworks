@@ -39,7 +39,6 @@ export class AuthGuard implements CanActivate {
         return false;
 
       }
-    console.log(this.auth.temQualquerPermissao(next.data['roles']));
       return true;
 
   }
