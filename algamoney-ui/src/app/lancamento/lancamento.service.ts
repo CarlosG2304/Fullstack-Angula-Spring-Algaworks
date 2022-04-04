@@ -48,7 +48,7 @@ export class LancamentoService {
 if (filtro.dataVencimentoFim) {
     params = params.set('dataVencimentoAte', this.datePipe.transform(filtro.dataVencimentoFim, 'yyyy-MM-dd')!);
 }
-console.log(environment.apiUrl.substring(7))
+
 return firstValueFrom(this.http.get<Page<Lancamento>>(`${this.lancamentosUrl}?resumo`, {  params }));
   }
 

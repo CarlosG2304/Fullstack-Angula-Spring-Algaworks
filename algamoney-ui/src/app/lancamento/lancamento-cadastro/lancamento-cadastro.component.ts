@@ -1,5 +1,5 @@
 import { Title } from '@angular/platform-browser';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Lancamento } from './../../core/model';
 import { Component, OnInit } from '@angular/core';
 
@@ -61,7 +61,7 @@ export class LancamentoCadastroComponent implements OnInit {
       tipo: [ 'RECEITA', Validators.required ],
       dataVencimento: [ null, Validators.required ],
       dataPagamento: [],
-      descricao: [null, [ Validators.required, Validators.minLength(5) ]],
+      descricao: [null, [this.validarObrigatoriedade, this.validarTamanhoMin(5) ]],
       valor: [ null, Validators.required ],
       pessoa: this.formBuilder.group({
         codigo: [ null, Validators.required ],
@@ -75,6 +75,14 @@ export class LancamentoCadastroComponent implements OnInit {
     });
   }
 
+  validarObrigatoriedade(input: FormControl){
+     return(input.value ? null : { obrigatoriedade: true})
+  }
+validarTamanhoMin(valor: number){
+ return(input: FormControl) => {
+  return (!input.value || input.value.length >= valor) ? null: { tamanhoMinimo: {tamanho: valor} };
+ };
+}
   get editando() {
     return Boolean(this.formulario.get('codigo')!.value);
   }
