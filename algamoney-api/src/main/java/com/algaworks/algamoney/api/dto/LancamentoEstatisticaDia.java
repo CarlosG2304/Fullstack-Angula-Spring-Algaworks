@@ -5,11 +5,13 @@ import java.time.LocalDate;
 
 import com.algaworks.algamoney.api.model.TipoLancamento;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 @Setter
 @Getter
+@AllArgsConstructor
 public class LancamentoEstatisticaDia {
 	
 	private TipoLancamento tipo;
@@ -17,14 +19,5 @@ public class LancamentoEstatisticaDia {
 	private LocalDate dia;
 	
 	private BigDecimal total;
-
-	public LancamentoEstatisticaDia(TipoLancamento tipo, LocalDate dia, BigDecimal total) {
-		super();
-		this.tipo = tipo;
-		this.dia = dia;
-		this.total = total;
-	}
-
-	
 
 }
