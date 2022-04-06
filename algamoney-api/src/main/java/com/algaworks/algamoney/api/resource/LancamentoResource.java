@@ -1,5 +1,6 @@
 package com.algaworks.algamoney.api.resource;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -27,6 +28,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.algaworks.algamoney.api.dto.LancamentoEstatisticaCategoria;
+import com.algaworks.algamoney.api.dto.LancamentoEstatisticaDia;
 import com.algaworks.algamoney.api.event.RecursoCriadoEvent;
 import com.algaworks.algamoney.api.exceptionHandler.AlgamoneyExceptionHandler.Erro;
 import com.algaworks.algamoney.api.model.Lancamento;
@@ -51,7 +54,19 @@ public class LancamentoResource {
 	
 	@Autowired
 	private MessageSource messageSource;
+
+	@GetMapping("/estatistica/por-dia")
+	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO') and hasAuthority('SCOPE_read')")
+	public List<LancamentoEstatisticaDia> porDia() {
+		return this.lancamentoRepository.porDia(LocalDate.now());
+	}
 	
+	@GetMapping("/estatistica/por-categoria")
+	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO') and hasAuthority('SCOPE_read')")
+	public List<LancamentoEstatisticaCategoria> porCategoria() {
+		return this.lancamentoRepository.porCategoria(LocalDate.now());
+	}
+
 	@GetMapping
 	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO') and hasAuthority('SCOPE_read')" )
 	public Page<Lancamento> pesquisar(LancamentoFilter lancamentoFilter, Pageable pageable) {
