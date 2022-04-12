@@ -8,7 +8,7 @@
 	</queryString>
 	<field name="total" class="java.math.BigDecimal"/>
 	<field name="tipo" class="com.algaworks.algamoney.api.model.TipoLancamento"/>
-	<field name="Pessoa" class="com.algaworks.algamoney.api.model.Pessoa"/>
+	<field name="pessoa" class="com.algaworks.algamoney.api.model.Pessoa"/>
 	<title>
 		<band height="60" splitType="Stretch">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
@@ -135,7 +135,7 @@
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{Pessoa}.getNome()]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{pessoa}.getNome()]]></textFieldExpression>
 			</textField>
 			<textField pattern="¤#,##0.00;¤-#,##0.00">
 				<reportElement x="495" y="1" width="54" height="24" uuid="bbec1c12-4e43-4864-af9f-9d8254cd0d5b">
