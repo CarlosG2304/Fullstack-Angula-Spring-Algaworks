@@ -1,0 +1,27 @@
+<div class="container">
+<form #loginForm="ngForm">
+
+  <div class="grid">
+
+   <div class="col-12 p-fluid">
+   <h1>Login</h1>
+   </div>
+    <div class="col-12 md:col-12 p-fluid">
+      <span class="p-float-label">
+        <input type="email" pInputText
+        name="usuario" ngModel required #usuario placeholder="Email">
+       </span>
+       </div>
+        <div class="col-12 md:col-12 p-fluid">
+          <span class="p-float-label">
+            <input type="password" pInputText
+           name="senha" ngModel  required #senha placeholder="Senha">
+    </span>
+    </div>
+    <div class="col-12 p-fluid">
+     <button pButton type="submit" label="Login" [disabled]="loginForm.invalid"
+     (click)="login(usuario.value, senha.value); senha.value='';"></button>
+    </div>
+  </div>
+</form>
+</div>

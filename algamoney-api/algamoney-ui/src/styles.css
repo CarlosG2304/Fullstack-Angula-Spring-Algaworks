@@ -1,0 +1,105 @@
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #404C51;
+}
+
+label {
+  font-weight: bold;
+}
+
+@media (min-width: 1200px) {
+  .container {
+      width: 1170px;
+      margin: 0 auto;
+  }
+}
+.container {
+  margin: 0 auto;
+}
+
+@media (max-width: 1199px) and (min-width: 800px) {
+  .container {
+    width: 770px;
+  }
+}
+
+@media (max-width: 799px) and (min-width: 400px) {
+  .container {
+    width: 390px;
+  }
+}
+
+.label {
+  margin: 0.5em;
+}
+
+.col-valor-header {
+  width: 120px;
+  text-align: center !important;
+}
+
+.col-valor-content {
+  text-align: right !important ;
+}
+
+.col-data-header {
+  width: 120px;
+}
+
+.col-data-content {
+  text-align: center !important;
+}
+
+.col-acoes {
+  width: 120px;
+  text-align: center;
+}
+
+.col-acoes > a {
+  margin-right: 5px;
+}
+
+.p-button {
+margin-right: 0.25em !important;
+}
+
+@media (min-width: 40em) {
+  .col-valor-header {
+    width: 120px;
+  }
+
+  .col-valor {
+    text-align: right !important;
+  }
+
+  .col-data-header {
+    width: 120px;
+  }
+
+  .col-data {
+    text-align: center !important;
+  }
+  .col-acoes-header {
+    width: 130px;
+  }
+
+  .col-acoes {
+      width: 130px;
+      text-align: center;
+  }
+}
+
+a {
+  color: #337ab7;
+text-decoration: none;
+}
+
+a:hover, a:focus {
+text-decoration: underline;
+}
+
+a.p-button:hover,
+a.p-button:focus {
+text-decoration: none;
+}
