@@ -1,3 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">&#x0A;<refactoring comment="Copy 0 elements to &apos;demo/src/main/resources&apos;&#x0D;&#x0A;- Destination element: &apos;demo/src/main/resources&apos;" description="Copy compilation units" destination="=demo/src\/main\/resources=/maven.pomderived=/true=/" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1645564274033" units="0" version="1.0"/>&#x0A;<refactoring comment="Delete resource &apos;demo&apos;" deleteContents="true" description="Delete resource &apos;demo&apos;" element1="/demo" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1645564454012"/>
-</session>

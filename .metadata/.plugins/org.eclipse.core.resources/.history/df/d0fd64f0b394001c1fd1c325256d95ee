@@ -1,5 +1,0 @@
-package com.algaworks.algamoney.api.token;
-
-public class RefreshTokenPreProcessorFilter {
-
-}
