@@ -2,6 +2,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "Launch AlgamoneyApiApplication",
+      "request": "launch",
+      "mainClass": "AlgamoneyApiApplication",
+      "projectName": "algamoney-api"
+    },
+    {
+      "type": "java",
       "name": "Spring Boot-AlgamoneyApiApplication<algamoney-api>",
       "request": "launch",
       "cwd": "${workspaceFolder}",

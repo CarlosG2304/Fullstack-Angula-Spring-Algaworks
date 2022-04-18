@@ -10,21 +10,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginFormComponent implements OnInit {
 
-  constructor(public auth:AuthService,
-              private errorHandler:ErrorHandlerService,
-              private router:Router) { }
+  constructor(public auth: AuthService,
+    private errorHandler: ErrorHandlerService,
+    private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  login(usuario:string, senha:string){
-    this.auth.login(usuario,senha)
-    .then(() =>{
-        this.router.navigate(['/lancamentos']);
+  login(usuario: string, senha: string) {
+    this.auth.login(usuario, senha)
+      .then(() => {
+        this.router.navigate(['/dashboard']);
       })
-    .catch(erro => {
-     this.errorHandler.handle(erro);
-    });
+      .catch(erro => {
+        this.errorHandler.handle(erro);
+      });
   }
 
 }
