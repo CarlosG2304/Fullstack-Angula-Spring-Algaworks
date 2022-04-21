@@ -1,3 +1,4 @@
+import { PanelModule } from 'primeng/panel';
 import { PessoasRoutingModule } from './pessoas-routing.module';
 import { MessageModule } from 'primeng/message';
 import { PessoasGridComponent } from './pessoas-grid/pessoas-grid.component';
@@ -10,12 +11,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 
-import {InputTextModule} from 'primeng/inputtext';
+import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { TooltipModule } from 'primeng/tooltip';
-import {InputMaskModule} from 'primeng/inputmask';
-
+import { InputMaskModule } from 'primeng/inputmask';
+import { DialogModule } from 'primeng/dialog';
+import { PessoaCadastroContatoComponent } from './pessoa-cadastro-contato/pessoa-cadastro-contato.component';
 
 
 
@@ -23,8 +25,9 @@ import {InputMaskModule} from 'primeng/inputmask';
 @NgModule({
   declarations: [
     PessoasGridComponent,
-    PessoaCadastroComponent ,
-    PessoasPesquisaComponent],
+    PessoaCadastroComponent,
+    PessoasPesquisaComponent,
+    PessoaCadastroContatoComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -36,10 +39,12 @@ import {InputMaskModule} from 'primeng/inputmask';
     TooltipModule,
     InputMaskModule,
     MessageModule,
+    PanelModule,
+    DialogModule,
 
     PessoasRoutingModule
 
   ],
- exports:[]
+  exports: []
 })
 export class PessoasModule { }

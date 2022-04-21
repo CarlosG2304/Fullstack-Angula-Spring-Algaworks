@@ -88,16 +88,18 @@ public class LancamentoResource {
 				.body(relatorio);
 	}
 
-	@GetMapping("/estatistica/por-dia")
+	@GetMapping("/estatisticas/por-dia")
 	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO') and hasAuthority('SCOPE_read')")
 	public List<LancamentoEstatisticaDia> porDia() {
-		return this.lancamentoRepository.porDia(LocalDate.now());
+		// Pode passar como parametro o LocalDate.Now() para pegar o dia de hoje.
+		return this.lancamentoRepository.porDia(LocalDate.of(2017, 06, 1));
 	}
 
-	@GetMapping("/estatistica/por-categoria")
+	@GetMapping("/estatisticas/por-categoria")
 	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO') and hasAuthority('SCOPE_read')")
 	public List<LancamentoEstatisticaCategoria> porCategoria() {
-		return this.lancamentoRepository.porCategoria(LocalDate.now());
+		// Pode passar como parametro o LocalDate.Now() para pegar o dia de hoje.
+		return this.lancamentoRepository.porCategoria(LocalDate.of(2017, 06, 1));
 	}
 
 	@GetMapping

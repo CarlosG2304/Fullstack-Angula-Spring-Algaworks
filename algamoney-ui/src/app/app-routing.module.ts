@@ -10,6 +10,8 @@ const routes: Routes = [
   { path: 'dashboard', loadChildren: () => import('../app/dashboard/dashboard.module').then(m => m.DashboardModule) },
   { path: 'lancamentos', loadChildren: () => import('../app/lancamento/lancamento.module').then(m => m.LancamentoModule) },
   { path: 'pessoas', loadChildren: () => import('../app/pessoas/pessoas.module').then(m => m.PessoasModule) },
+  { path: 'relatorios', loadChildren: () => import('../app/relatorios/relatorios.module').then(m => m.RelatoriosModule) },
+
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: 'nao-autorizado', component: NaoAutorizadoComponent },
   { path: 'pagina-nao-encontrada', component: PaginaNaoEncontradaComponent },

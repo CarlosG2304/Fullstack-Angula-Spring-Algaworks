@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from  '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { DatePipe } from '@angular/common';
 
@@ -23,36 +23,44 @@ export class LancamentoService {
 
   lancamentosUrl = '';
 
-  constructor(private http:HttpClient,
-              private datePipe: DatePipe) {
-                this.lancamentosUrl = `${environment.apiUrl}/lancamentos`
-               }
+  constructor(private http: HttpClient,
+    private datePipe: DatePipe) {
+    this.lancamentosUrl = `${environment.apiUrl}/lancamentos`
+  }
 
+  uploadHeaders() {
+    return new HttpHeaders()
+      .append('Authorization', 'Bearer ' + localStorage.getItem('token'))
+  }
 
-  pesquisar(filtro: LancamentoFiltro): Promise<Page<Lancamento>>{
+  urlUploadAnexo(): string {
+    return `${this.lancamentosUrl}/anexo`
+  }
+
+  pesquisar(filtro: LancamentoFiltro): Promise<Page<Lancamento>> {
 
     let params = new HttpParams();
 
-  params = params.set('page',filtro.pagina.toString());
-  params = params.set('size',filtro.itensPorPagina.toString());
+    params = params.set('page', filtro.pagina.toString());
+    params = params.set('size', filtro.itensPorPagina.toString());
 
 
-  if(filtro.descricao){
- params = params.set('descricao',filtro.descricao);
+    if (filtro.descricao) {
+      params = params.set('descricao', filtro.descricao);
+    }
+
+    if (filtro.dataVencimentoInicio) {
+      params = params.set('dataVencimentoDe', this.datePipe.transform(filtro.dataVencimentoInicio, 'yyyy-MM-dd')!);
+    }
+
+    if (filtro.dataVencimentoFim) {
+      params = params.set('dataVencimentoAte', this.datePipe.transform(filtro.dataVencimentoFim, 'yyyy-MM-dd')!);
+    }
+
+    return firstValueFrom(this.http.get<Page<Lancamento>>(`${this.lancamentosUrl}?resumo`, { params }));
   }
 
-  if (filtro.dataVencimentoInicio) {
-    params = params.set('dataVencimentoDe', this.datePipe.transform(filtro.dataVencimentoInicio, 'yyyy-MM-dd')!);
-}
-
-if (filtro.dataVencimentoFim) {
-    params = params.set('dataVencimentoAte', this.datePipe.transform(filtro.dataVencimentoFim, 'yyyy-MM-dd')!);
-}
-
-return firstValueFrom(this.http.get<Page<Lancamento>>(`${this.lancamentosUrl}?resumo`, {  params }));
-  }
-
-  excluir(codigo:number): Promise<Lancamento> {
+  excluir(codigo: number): Promise<Lancamento> {
 
 
     return firstValueFrom(this.http.delete<Lancamento>(`${this.lancamentosUrl}/${codigo}`))
@@ -60,38 +68,38 @@ return firstValueFrom(this.http.get<Page<Lancamento>>(`${this.lancamentosUrl}?re
 
   adicionar(lancamento: Lancamento): Promise<Lancamento> {
 
-      return firstValueFrom(this.http.post<Lancamento>(this.lancamentosUrl, lancamento));
+    return firstValueFrom(this.http.post<Lancamento>(this.lancamentosUrl, lancamento));
   }
 
   atualizar(lancamento: Lancamento): Promise<Lancamento> {
 
-      return firstValueFrom(this.http.put<Lancamento>(`${this.lancamentosUrl}/${lancamento.codigo}`, lancamento));
+    return firstValueFrom(this.http.put<Lancamento>(`${this.lancamentosUrl}/${lancamento.codigo}`, lancamento));
   }
 
-buscarPorCodigo(codigo:number){
+  buscarPorCodigo(codigo: number) {
 
 
-  return this.http.get(`${this.lancamentosUrl}/${codigo}`)
-  .toPromise()
-  .then((response:any) => {
-    this.converterStringsParaDatas([response]);
+    return this.http.get(`${this.lancamentosUrl}/${codigo}`)
+      .toPromise()
+      .then((response: any) => {
+        this.converterStringsParaDatas([response]);
 
-    return response;
-  });
+        return response;
+      });
 
-}
+  }
 
-private converterStringsParaDatas(lancamentos: any[]) {
+  private converterStringsParaDatas(lancamentos: any[]) {
 
-  for (const lancamento of lancamentos) {
+    for (const lancamento of lancamentos) {
 
-    lancamento.dataVencimento = new Date(lancamento.dataVencimento);
+      lancamento.dataVencimento = new Date(lancamento.dataVencimento);
 
-    if (lancamento.dataPagamento) {
-      lancamento.dataPagamento = new Date(lancamento.dataPagamento);
+      if (lancamento.dataPagamento) {
+        lancamento.dataPagamento = new Date(lancamento.dataPagamento);
+      }
     }
   }
-}
 
 
 }

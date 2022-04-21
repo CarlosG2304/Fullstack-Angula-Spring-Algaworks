@@ -1,17 +1,19 @@
-import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { MessageModule } from 'primeng/message';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
-import {InputTextareaModule} from 'primeng/inputtextarea';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 import { TooltipModule } from 'primeng/tooltip';
 import { CalendarModule } from 'primeng/calendar';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { InputTextModule } from 'primeng/inputtext';
 import { SelectButtonModule } from 'primeng/selectbutton';
+import { FileUploadModule } from 'primeng/fileupload';
+import { ProgressSpinnerModule } from 'primeng/progressspinner'
 
 import { SharedModule } from './../shared/shared.module';
 import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-cadastro.component';
@@ -23,9 +25,9 @@ import { LancamentoRoutingModule } from './lancamento-routing.module';
 
 @NgModule({
   declarations: [
-  LancamentoCadastroComponent,
-  LancamentosPesquisaComponent,
-  LancamentosGridComponent],
+    LancamentoCadastroComponent,
+    LancamentosPesquisaComponent,
+    LancamentosGridComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -44,7 +46,9 @@ import { LancamentoRoutingModule } from './lancamento-routing.module';
     DropdownModule,
     InputNumberModule,
     MessageModule,
-    LancamentoRoutingModule
+    LancamentoRoutingModule,
+    FileUploadModule,
+    ProgressSpinnerModule
 
   ],
   exports: []

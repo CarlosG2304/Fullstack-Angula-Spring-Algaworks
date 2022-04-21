@@ -1,4 +1,4 @@
-import { AuthService } from './../seguranca/auth.service';
+
 import { HttpClient } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { LOCALE_ID, NgModule } from '@angular/core';
@@ -13,11 +13,14 @@ import { MessageService, ConfirmationService } from 'primeng/api';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 
-import { ErrorHandlerService } from './error-handler.service';
 import { NavbarComponent } from './navbar/navbar.component';
 import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada.component';
 import { NaoAutorizadoComponent } from './nao-autorizado.component';
 
+import { ErrorHandlerService } from './error-handler.service';
+import { RelatoriosService } from './../relatorios/relatorios.service';
+import { DashboardService } from './../dashboard/dashboard.service';
+import { AuthService } from './../seguranca/auth.service';
 registerLocaleData(localePt, 'pt-BR');
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -33,19 +36,19 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     ConfirmDialogModule,
     TranslateModule.forRoot({
       loader: {
-          provide: TranslateLoader,
-          useFactory: HttpLoaderFactory,
-          deps: [HttpClient]
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
       }
-      })
+    })
 
   ],
-  exports:[NavbarComponent,
+  exports: [NavbarComponent,
     ToastModule,
     ConfirmDialogModule],
-  providers: [TranslateService,MessageService ,ConfirmationService,
+  providers: [TranslateService, MessageService, ConfirmationService,
     DatePipe,
-    {provide: LOCALE_ID, useValue: 'pt-BR' }, ErrorHandlerService, Title, AuthService
+    { provide: LOCALE_ID, useValue: 'pt-BR' }, ErrorHandlerService, Title, AuthService, DashboardService, RelatoriosService
   ]
 })
 export class CoreModule { }

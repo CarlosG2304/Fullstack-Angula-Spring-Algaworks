@@ -20,6 +20,7 @@ import { ErrorHandlerService } from '../../core/error-handler.service';
 export class LancamentoCadastroComponent implements OnInit {
 
   formulario!: FormGroup;
+  uploadEmAndamento = false;
 
   categorias: any[] = [];
   pessoas: any[] = []
@@ -30,7 +31,7 @@ export class LancamentoCadastroComponent implements OnInit {
   ];
 
 
-    constructor(
+  constructor(
     private categoriaService: CategoriasService,
     private pessoaService: PessoasService,
     private lancamentoService: LancamentoService,
@@ -55,34 +56,55 @@ export class LancamentoCadastroComponent implements OnInit {
     this.carregarPessoas()
   }
 
-  configurarFormulario() {
-    this.formulario = this.formBuilder.group({
-      codigo: [],
-      tipo: [ 'RECEITA', Validators.required ],
-      dataVencimento: [ null, Validators.required ],
-      dataPagamento: [],
-      descricao: [null, [this.validarObrigatoriedade, this.validarTamanhoMin(5) ]],
-      valor: [ null, Validators.required ],
-      pessoa: this.formBuilder.group({
-        codigo: [ null, Validators.required ],
-        nome: []
-      }),
-      categoria: this.formBuilder.group({
-        codigo: [ null, Validators.required ],
-        nome: []
-      }),
-      observacao: []
+  removerAnexo() {
+    this.formulario.patchValue({
+      anexo: null,
+      urlAnexo: null
     });
   }
 
-  validarObrigatoriedade(input: FormControl){
-     return(input.value ? null : { obrigatoriedade: true})
+  get urlUploadAnexo() {
+    return this.lancamentoService.urlUploadAnexo();
   }
-validarTamanhoMin(valor: number){
- return(input: FormControl) => {
-  return (!input.value || input.value.length >= valor) ? null: { tamanhoMinimo: {tamanho: valor} };
- };
-}
+
+  get uploadHeaders() {
+    return this.lancamentoService.uploadHeaders();
+  }
+
+  antesUploadAnexo() {
+    this.uploadEmAndamento = true;
+  }
+
+  configurarFormulario() {
+    this.formulario = this.formBuilder.group({
+      codigo: [],
+      tipo: ['RECEITA', Validators.required],
+      dataVencimento: [null, Validators.required],
+      dataPagamento: [],
+      descricao: [null, [this.validarObrigatoriedade, this.validarTamanhoMin(5)]],
+      valor: [null, Validators.required],
+      pessoa: this.formBuilder.group({
+        codigo: [null, Validators.required],
+        nome: []
+      }),
+      categoria: this.formBuilder.group({
+        codigo: [null, Validators.required],
+        nome: []
+      }),
+      observacao: [],
+      anexo: [],
+      urlAnexo: []
+    });
+  }
+
+  validarObrigatoriedade(input: FormControl) {
+    return (input.value ? null : { obrigatoriedade: true })
+  }
+  validarTamanhoMin(valor: number) {
+    return (input: FormControl) => {
+      return (!input.value || input.value.length >= valor) ? null : { tamanhoMinimo: { tamanho: valor } };
+    };
+  }
   get editando() {
     return Boolean(this.formulario.get('codigo')!.value);
   }
@@ -92,14 +114,41 @@ validarTamanhoMin(valor: number){
       .then(lancamento => {
         this.formulario.patchValue(lancamento)
       },
-      erro => this.errorHandler.handle(erro));
+        erro => this.errorHandler.handle(erro));
+  }
+
+  aoTerminarUploadAnexo(event: any) {
+    const anexo = event.originalEvent.body;
+
+    this.formulario.patchValue({
+      anexo: anexo.nome,
+      urlAnexo: (anexo.url as string).replace('\\', 'https://')
+    });
+
+    this.uploadEmAndamento = false;
+  }
+
+  erroUpload(event: any) {
+    this.messageService.add({ severity: 'error', detail: 'Erro ao tentar enviar anexo!' });
+
+    this.uploadEmAndamento = false;
+  }
+
+  get nomeAnexo() {
+    const nome = this.formulario?.get('anexo')?.value;
+
+    if (nome) {
+      return nome.substring(nome.indexOf('_') + 1, nome.length);
+    }
+
+    return '';
   }
 
   carregarCategorias() {
     return this.categoriaService.listarTodas()
       .then(categorias => {
         this.categorias = categorias
-          .map((c:any) => ({ label: c.nome, value: c.codigo }));
+          .map((c: any) => ({ label: c.nome, value: c.codigo }));
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
@@ -108,7 +157,7 @@ validarTamanhoMin(valor: number){
     this.pessoaService.listarTodas()
       .then(pessoas => {
         this.pessoas = pessoas
-          .map((p:any) => ({ label: p.nome, value: p.codigo }));
+          .map((p: any) => ({ label: p.nome, value: p.codigo }));
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
@@ -123,11 +172,11 @@ validarTamanhoMin(valor: number){
 
   atualizarLancamento() {
     this.lancamentoService.atualizar(this.formulario.value)
-      .then((lancamento:Lancamento) => {
-          this.formulario.patchValue(lancamento)
-          this.messageService.add({ severity: 'success', detail: 'Lançamento alterado com sucesso!' });
-          this.atualizarTituloEdicao();
-        }
+      .then((lancamento: Lancamento) => {
+        this.formulario.patchValue(lancamento)
+        this.messageService.add({ severity: 'success', detail: 'Lançamento alterado com sucesso!' });
+        this.atualizarTituloEdicao();
+      }
       ).catch(erro => this.errorHandler.handle(erro))
   }
 
