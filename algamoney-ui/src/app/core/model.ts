@@ -20,18 +20,31 @@ export class Contato {
   }
 }
 
+export class Estado {
+  codigo?: number;
+  nome?: string;
+}
+
+export class Cidade {
+  codigo?: number;
+  nome?: string;
+  estado = new Estado();
+}
+
 export class Endereco {
   logradouro?: string;
   numero?: number;
   complemento?: string;
   bairro?: string;
   cep?: number;
-  cidade?: string;
-  estado?: string;
+  cidade = new Cidade();
 }
 export class Categoria {
   codigo?: number;
 }
+
+
+
 
 export class Lancamento {
   codigo?: number;

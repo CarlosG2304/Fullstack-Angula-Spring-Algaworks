@@ -19,7 +19,10 @@ import { PessoasService } from './../pessoas.service';
 export class PessoaCadastroComponent implements OnInit {
 
   pessoa = new Pessoa;
-
+  estado: any[] = [];
+  estados: any;
+  cidades: any[] = [];
+  estadoSelecionado?: number;
 
   constructor(private pessoaService: PessoasService,
     private messageService: MessageService,
@@ -32,12 +35,25 @@ export class PessoaCadastroComponent implements OnInit {
 
     this.title.setTitle('Nova Pessoa')
 
+    this.carregarEstados();
+
     if (codigoPessoa) {
       this.carregarPessoa(codigoPessoa);
     }
 
   }
 
+  carregarEstados() {
+    this.pessoaService.listarEstados().then(lista => {
+      this.estados = lista.map(uf => ({ label: uf.nome, value: uf.codigo }));
+    });
+  }
+
+  carregarCidades() {
+    this.pessoaService.pesquisarCidades(this.estadoSelecionado!).then(lista => {
+      this.cidades = lista.map(c => ({ label: c.nome, value: c.codigo }));
+    });
+  }
 
   get editando() {
     return Boolean(this.pessoa.codigo)
@@ -66,6 +82,14 @@ export class PessoaCadastroComponent implements OnInit {
     this.pessoaService.buscarPorCodigo(codigo)
       .then(pessoa => {
         this.pessoa = pessoa;
+
+        this.estadoSelecionado = (this.pessoa.endereco.cidade) ?
+          this.pessoa.endereco.cidade.estado.codigo : undefined;
+
+        if (this.estadoSelecionado) {
+          this.carregarCidades();
+        }
+
         this.atualizarTituloEdicao();
       }).catch(erro => this.errorHandler.handle(erro));
   }

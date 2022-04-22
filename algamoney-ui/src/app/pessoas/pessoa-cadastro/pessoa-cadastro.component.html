@@ -55,34 +55,36 @@
         <p-message *ngIf="cep.hasError('required') && cep.dirty" severity="error" text="Informe o cep"></p-message>
 
       </div>
+
+      <div class="col-12 md:col-6 p-fluid">
+        <label>Estado</label>
+
+        <p-dropdown placeholder="Selecione..." [filter]="true" [options]="estados" [(ngModel)]="estadoSelecionado"
+          name="estadoSelecionado" #estado="ngModel" [required]=true (onChange)="carregarCidades()"></p-dropdown>
+
+        <p-message *ngIf="estado.hasError('required') && estado.touched" severity="error" text="Informe o estado">
+        </p-message>
+      </div>
+
+
       <div class="col-12  md:col-6 p-fluid">
         <label>Cidade</label>
-        <input pInputText type="text" [(ngModel)]="pessoa.endereco.cidade" name="cidade" #cidade="ngModel" required>
+        <p-dropdown placeholder="Selecione..." [filter]="true" [options]="cidades"
+          [(ngModel)]="pessoa.endereco.cidade.codigo" name="cidade" #cidade="ngModel" [required]=true
+          [disabled]="!estadoSelecionado"></p-dropdown>
 
-        <p-message *ngIf="cidade.hasError('required') && cidade.dirty" severity="error" text="Informe a cidade">
+        <p-message *ngIf="cidade.hasError('required') && cidade.touched" severity="error" text="Informe a cidade">
         </p-message>
 
       </div>
       <div class="col-12  md:col-6 p-fluid">
-        <label>Estado</label>
-        <input pInputText type="text" [(ngModel)]="pessoa.endereco.estado" name="estado" #estado="ngModel" required>
 
-        <p-message *ngIf="estado.hasError('required') && estado.dirty" severity="error" text="Informe o estado">
-        </p-message>
+        <p-panel header="Contatos">
 
+          <app-pessoa-cadastro-contato [contatos]="pessoa.contatos"></app-pessoa-cadastro-contato>
+
+        </p-panel>
       </div>
-      <p-panel header="Contatos">
-
-
-        <app-pessoa-cadastro-contato [contatos]="pessoa.contatos"></app-pessoa-cadastro-contato>
-
-
-
-
-      </p-panel>
-
-
-
       <div class="col-12">
         <button pButton type="submit" label="Salvar" [disabled]="pessoaForm.invalid"></button>
         <button pButton type="button" label="Novo" class="p-button-info" routerLink="/pessoas/novo"></button>

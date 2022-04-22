@@ -1,3 +1,4 @@
+import { DropdownModule } from 'primeng/dropdown';
 import { PanelModule } from 'primeng/panel';
 import { PessoasRoutingModule } from './pessoas-routing.module';
 import { MessageModule } from 'primeng/message';
@@ -41,6 +42,7 @@ import { PessoaCadastroContatoComponent } from './pessoa-cadastro-contato/pessoa
     MessageModule,
     PanelModule,
     DialogModule,
+    DropdownModule,
 
     PessoasRoutingModule
 
