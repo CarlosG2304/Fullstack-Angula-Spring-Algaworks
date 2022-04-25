@@ -1,5 +1,7 @@
 package com.algaworks.algamoney.api.config.property;
 
+import java.util.List;
+
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -27,18 +29,16 @@ public class AlgamoneyApiProperty {
 
 		private String secretAccessKey;
 
-		private String bucket = "cg-algamoney-arquivos";
+		private String bucket = "cg-algamoney-arquivos2";
 	}
 
 	@Setter
+	@Getter
 	public static class Seguranca {
 
-		private boolean enableHttps;
-
-		public boolean isEnableHttps() {
-			return enableHttps;
-		}
-
+		private List<String> redirectsPermitidos;
+		private String authServerUrl;
+		
 	}
 
 	@Getter

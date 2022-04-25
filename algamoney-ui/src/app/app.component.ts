@@ -13,8 +13,8 @@ export class AppComponent {
   constructor(
     private config: PrimeNGConfig,
     private translateService: TranslateService,
-    private router:Router
-  ) {}
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.translateService.setDefaultLang('pt');
@@ -22,8 +22,5 @@ export class AppComponent {
       .subscribe(res => this.config.setTranslation(res));
   }
 
-  exibindoNavbar(){
-    return this.router.url != '/login';
-  }
 
 }

@@ -1,9 +1,8 @@
-import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-
-import { ErrorHandlerService } from './../error-handler.service';
-import { LogoutService } from './../../seguranca/logout.service';
+import { Router } from '@angular/router';
 import { AuthService } from './../../seguranca/auth.service';
+import { ErrorHandlerService } from './../error-handler.service';
+
 
 @Component({
   selector: 'app-navbar',
@@ -13,29 +12,24 @@ import { AuthService } from './../../seguranca/auth.service';
 export class NavbarComponent implements OnInit {
 
   exibindoMenu: boolean = false;
-    usuarioLogado: string = ''
+  usuarioLogado: string = ''
 
-    constructor(private auth: AuthService,
-                private logoutService:LogoutService,
-                private errorHandler:ErrorHandlerService,
-                private router:Router) { }
+  constructor(private auth: AuthService,
+    private errorHandler: ErrorHandlerService,
+    private router: Router) { }
 
-    ngOnInit() {
-      this.usuarioLogado = this.auth.jwtPayload?.nome;
-    }
+  ngOnInit() {
+    this.usuarioLogado = this.auth.jwtPayload?.nome;
+  }
 
-    criarNovoAccessToken(){
-      this.auth.obterNovoAccessToken();
-    }
-    temPermissao(permissao: string) {
-      return this.auth.temPermissao(permissao);
-    }
+  criarNovoAccessToken() {
+    this.auth.obterNovoAccessToken();
+  }
+  temPermissao(permissao: string) {
+    return this.auth.temPermissao(permissao);
+  }
 
-    logout(){
-      this.logoutService.logout()
-      .then(() => {
-        this.router.navigate(['/login']);
-      })
-      .catch(erro => this.errorHandler.handle(erro))
-    }
+  logout() {
+    this.auth.logout();
+  }
 }
