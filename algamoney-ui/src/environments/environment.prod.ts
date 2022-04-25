@@ -3,6 +3,6 @@ export const environment = {
   apiUrl: 'https://carlos-algamoney-api.herokuapp.com',
   tokenAllowedDomains: [/algamoney-api.herokuapp.com/],
   tokenDisallowedRoutes: [/\/oauth2\/token/],
-  oauthCallbackUrl: 'https://carlos-algamoney-api.herokuapp.com/authorized',
-  logoutRedirectUrl: 'https://carlos-algamoney-api.herokuapp.com'
+  oauthCallbackUrl: 'https://carlos-algamoney-angular.netlify.app//authorized',
+  logoutRedirectUrl: 'https://carlos-algamoney-angular.netlify.app/'
 };
