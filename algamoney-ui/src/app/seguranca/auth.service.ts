@@ -52,6 +52,8 @@ export class AuthService {
       'redirect_uri=' + redirectURI
     ]
 
+    console.log(this.oauthAuthorizeUrl + '?' + params.join('&'))
+
     window.location.href = this.oauthAuthorizeUrl + '?' + params.join('&');
   }
 
@@ -67,7 +69,7 @@ export class AuthService {
     const stateSalvo = localStorage.getItem('state');
 
     if (stateSalvo !== state) {
-      return Promise.reject(null);
+      return Promise.reject();
     }
 
     const codeVerifier = localStorage.getItem('codeVerifier')!;
@@ -88,11 +90,15 @@ export class AuthService {
         this.armazenarToken(response['access_token']);
         this.armazenarRefreshToken(response['refresh_token']);
         console.log('Novo access token criado!');
-        return Promise.resolve(null);
+
+        localStorage.removeItem('state');
+        localStorage.removeItem('codeVerifier');
+
+        return Promise.resolve();
       })
       .catch((response: any) => {
         console.error('Erro ao gerar o token com o code.', response);
-        return Promise.resolve();
+        return Promise.reject();
       });
 
   }

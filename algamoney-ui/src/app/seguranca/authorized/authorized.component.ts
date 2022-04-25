@@ -23,7 +23,8 @@ export class AuthorizedComponent implements OnInit {
             this.route.navigate(['/'])
           })
           .catch((e: any) => {
-            console.error('Erro no callback')
+            console.error(e);
+            this.route.navigate(['/'])
           });
       } else {
         this.route.navigate(['/']);
